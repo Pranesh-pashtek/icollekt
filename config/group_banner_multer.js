@@ -1,0 +1,22 @@
+const multer = require("multer");
+const path = require("path");
+const express = require("express");
+var app = express();
+
+
+const storage = multer.diskStorage({
+    destination: './upload/group_banner',
+   
+
+    filename: (req, file, cb) =>{
+
+        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+    }
+    
+})
+
+const upload = multer({
+    storage: storage,
+})
+
+module.exports=upload;

@@ -1,0 +1,27 @@
+const multer = require("multer");
+const path = require("path");
+const express = require("express");
+var app = express();
+// const { MulterError } = require("multer");
+
+
+const storage = multer.diskStorage({
+    destination: './upload/group_upload',
+    // destination: './upload/home_images',
+
+    filename: (req, file, cb) =>{
+
+        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+    }
+    
+})
+
+
+
+
+const upload = multer({
+    storage: storage,
+//  limits: {fileSize: 1024 * 1800}
+})
+
+module.exports=upload;
